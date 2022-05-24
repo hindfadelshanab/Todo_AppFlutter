@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="70" height="70" viewBox="0 0 70 70">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Mask" width="70" height="70" rx="16" transform="translate(0.525 0.511)" fill="#007aff"/>
+    </clipPath>
+  </defs>
+  <g id="Logo" transform="translate(-0.525 -0.511)">
+    <rect id="Mask-2" data-name="Mask" width="70" height="70" rx="16" transform="translate(0.525 0.511)" fill="#007aff"/>
+    <g id="Logo-2" data-name="Logo" clip-path="url(#clip-path)">
+      <path id="Path_3" data-name="Path 3" d="M23.977,12.511C27.129,27,52.112,32.121,52.112,32.121L31.946,75.365S5.383,67.694,1.525,45.919,3.574,8.83,3.574,8.83L17.373.315S20.825-1.984,23.977,12.511Z" transform="translate(-1 -12)" fill="#42aaff" opacity="0.547"/>
+      <path id="Fill_1" data-name="Fill 1" d="M44,21.928v3.858a1.5,1.5,0,0,1-1.51,1.5H23.019a19.849,19.849,0,0,1-3.271-.264l-1.354-.216a19.993,19.993,0,0,0-3.272-.276H8.388V46.121a1.6,1.6,0,0,1-1.594,1.594h-5.2A1.593,1.593,0,0,1,0,46.121V1.594A1.593,1.593,0,0,1,1.592,0h5.2A1.6,1.6,0,0,1,8.388,1.594V21.557h5.764a19.949,19.949,0,0,0,4.768-.563,20.613,20.613,0,0,1,4.77-.563h18.8a1.5,1.5,0,0,1,1.51,1.5" transform="translate(49.668 19.448) rotate(25)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
