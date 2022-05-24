@@ -12,7 +12,7 @@ import 'Screen/HomePage.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp( MaterialApp(home: HomePage() ,));
+  runApp( MaterialApp(home: SignUpPage() ,));
 }
 
 class MyApp extends StatefulWidget{

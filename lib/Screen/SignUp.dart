@@ -3,6 +3,8 @@ import 'package:final_project/Screen/SignInPage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
+import 'bottomContainer.dart';
+
 class SignUpPage extends StatefulWidget {
   SignUpPage({ Key? key}) : super(key: key);
 
@@ -109,7 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
           });
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (builder) => HomePage()),
+              MaterialPageRoute(builder: (builder) => BottomContainer()),
                   (route) => false);
         } catch (e) {
           final snackbar = SnackBar(content: Text(e.toString()));
