@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ViewData extends StatefulWidget {
-  ViewData({ required this.doucment , required this.id}) : super();
+  ViewData({required this.doucment, required this.id}) : super();
   final Map<String, dynamic> doucment;
-  final String id ;
+  final String id;
 
   @override
   _ViewDataState createState() => _ViewDataState();
@@ -24,8 +24,9 @@ class _ViewDataState extends State<ViewData> {
   @override
   void initState() {
     super.initState();
-    String title = widget.doucment["title"] == null ? "Hey There" : widget
-        .doucment["title"];
+    String title = widget.doucment["title"] == null
+        ? "Hey There"
+        : widget.doucment["title"];
     _titleController = TextEditingController(text: title);
 
     String description = widget.doucment["description"] == null
@@ -40,19 +41,13 @@ class _ViewDataState extends State<ViewData> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
-        width: MediaQuery
-            .of(context)
-            .size
-            .height,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-              Color(0xff1d1e26),
-              Color(0xff252041),
-            ])),
+          Color(0xff1d1e26),
+          Color(0xff252041),
+        ])),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,20 +67,39 @@ class _ViewDataState extends State<ViewData> {
                         color: Colors.white,
                         size: 28,
                       )),
-                  IconButton(
-                      onPressed: () {
-
-                        setState(() {
-                          edit =!edit;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.edit ,
-                        color:edit?Colors.green:Colors.white,
-                        size: 28,
-                      )),
+                  Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              FirebaseFirestore.instance
+                                  .collection("Todo")
+                                  .doc(widget.id)
+                                  .delete()
+                                  .then((value) {
+                                Navigator.pop(context);
+                              });
+                            });
+                          },
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                            size: 28,
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              edit = !edit;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.edit,
+                            color: edit ? Colors.green : Colors.white,
+                            size: 28,
+                          )),
+                    ],
+                  ),
                 ],
-
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
@@ -93,7 +107,7 @@ class _ViewDataState extends State<ViewData> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      edit?"Editing": "View",
+                      edit ? "Editing" : "View",
                       style: TextStyle(
                           fontSize: 33,
                           color: Colors.white,
@@ -175,7 +189,7 @@ class _ViewDataState extends State<ViewData> {
                     SizedBox(
                       height: 50,
                     ),
-                   edit? Button():Container(),
+                    edit ? Button() : Container(),
                     SizedBox(
                       height: 30,
                     ),
@@ -192,24 +206,17 @@ class _ViewDataState extends State<ViewData> {
   Widget Button() {
     return InkWell(
       onTap: () {
-        FirebaseFirestore.instance.collection("Todo").doc(widget.id).update(
-            {
-              "title": _titleController.text,
-              "task": type,
-              "Category": category,
-              "description": _decriptionController.text,
-
-            }
-        );
+        FirebaseFirestore.instance.collection("Todo").doc(widget.id).update({
+          "title": _titleController.text,
+          "task": type,
+          "Category": category,
+          "description": _decriptionController.text,
+        });
         Navigator.pop(context);
       },
-
       child: Container(
         height: 55,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: Color(0xff2a2e3d),
           borderRadius: BorderRadius.circular(20),
@@ -231,11 +238,13 @@ class _ViewDataState extends State<ViewData> {
 
   Widget taskTypeSelect(String label, int color) {
     return InkWell(
-      onTap:edit? () {
-        setState(() {
-          type = label;
-        });
-      }:null,
+      onTap: edit
+          ? () {
+              setState(() {
+                type = label;
+              });
+            }
+          : null,
       child: Chip(
         backgroundColor: type == label ? Colors.white : Color(color),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -243,7 +252,8 @@ class _ViewDataState extends State<ViewData> {
           label,
           style: TextStyle(
               color: type == label ? Colors.black : Colors.white,
-              fontSize: 15, fontWeight: FontWeight.w600),
+              fontSize: 15,
+              fontWeight: FontWeight.w600),
         ),
         labelPadding: EdgeInsets.symmetric(horizontal: 17, vertical: 3.8),
       ),
@@ -251,12 +261,14 @@ class _ViewDataState extends State<ViewData> {
   }
 
   Widget categorySelect(String label, int color) {
-    return  InkWell(
-      onTap: edit?() {
-        setState(() {
-          category = label;
-        });
-      }:null,
+    return InkWell(
+      onTap: edit
+          ? () {
+              setState(() {
+                category = label;
+              });
+            }
+          : null,
       child: Chip(
         backgroundColor: category == label ? Colors.white : Color(color),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -264,7 +276,8 @@ class _ViewDataState extends State<ViewData> {
           label,
           style: TextStyle(
               color: category == label ? Colors.black : Colors.white,
-              fontSize: 15, fontWeight: FontWeight.w600),
+              fontSize: 15,
+              fontWeight: FontWeight.w600),
         ),
         labelPadding: EdgeInsets.symmetric(horizontal: 17, vertical: 3.8),
       ),
@@ -285,10 +298,7 @@ class _ViewDataState extends State<ViewData> {
   Widget title() {
     return Container(
       height: 55,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           color: Color(0xff2a2e3d), borderRadius: BorderRadius.circular(15)),
       child: TextFormField(
@@ -307,10 +317,7 @@ class _ViewDataState extends State<ViewData> {
   Widget description() {
     return Container(
       height: 150,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           color: Color(0xff2a2e3d), borderRadius: BorderRadius.circular(15)),
       child: TextFormField(

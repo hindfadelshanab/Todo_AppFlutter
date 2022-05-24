@@ -30,7 +30,6 @@ class _MyAppState extends State<MyApp> {
 
   void signUp () async{
     try{
-
       await auth.createUserWithEmailAndPassword(email: "hind@gmail.com", password: "1233456");
     }catch(e){
       print(e);
